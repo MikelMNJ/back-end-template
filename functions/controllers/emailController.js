@@ -4,10 +4,10 @@ const userModel = require('../models/userModel');
 const sgMail = require('@sendgrid/mail');
 const fifteenMinutes = 900;
 const {
-  REACT_APP_EMAIL_API_KEY: apiKey,
-  REACT_APP_VERIFIED_SENDER_EMAIL: sendAddress,
-  REACT_APP_BASE_URL: url,
-  REACT_APP_JWT_SECRET: jwtSecret,
+  EMAIL_API_KEY: apiKey,
+  VERIFIED_SENDER_EMAIL: sendAddress,
+  BASE_URL: url,
+  JWT_SECRET: jwtSecret,
 } = process.env;
 
 sgMail.setApiKey(apiKey);

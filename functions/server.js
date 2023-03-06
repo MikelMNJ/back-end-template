@@ -4,7 +4,7 @@ const serverless = require('serverless-http');
 const cors = require('cors');
 const app = express();
 
-const { REACT_APP_API_V1: v1 } = process.env;
+const { API_V1: v1 } = process.env;
 
 app.set('trust proxy', 1);
 

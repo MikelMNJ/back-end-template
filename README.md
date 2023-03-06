@@ -10,7 +10,7 @@ The structure of this folder is as follows:
 * **routes**: All route modules that call route controllers.
 
 > **Note**: The main *server.js* file is responsible for initiating the MongoDB connection, establishing global back-end middleware and defining main API routes.
-> *connect.DB/db.js* is where your *REACT_APP_MONGO_URI* is used.
+> *connect.DB/db.js* is where your *MONGO_URI* is used.
 
 If you need to add a new main route, add a new route in the `// Define routes` section, following the same format as the existing base routes.
 The following is in *server.js*.
@@ -21,7 +21,7 @@ const serverless = require('serverless-http');
 const cors = require('cors');
 const app = express();
 
-const { REACT_APP_API_V1: v1 } = process.env;
+const { API_V1: v1 } = process.env;
 
 app.set('trust proxy', 1);
 
@@ -45,18 +45,18 @@ module.exports.handler = serverless(app);
 ```
 
 ## About API Versioning
-Since the version number is attached to the base path *REACT_APP_API_V1* variable, you have modular control over API versioning, so you don't
+Since the version number is attached to the base path *API_V1* variable, you have modular control over API versioning, so you don't
 break existing API versions still in production.  For new versions, add a new env variable with the new API version in the name and value:
 ```javascript
-REACT_APP_API_V2="/.netlify/functions/server/v2/"
-REACT_APP_API_V1="/.netlify/functions/server/v1/"
+API_V2="/.netlify/functions/server/v2/"
+API_V1="/.netlify/functions/server/v1/"
 ```
 
 Then import it for use in *server.js*.
 ```javascript
 const {
-  REACT_APP_API_V2: v2,
-  REACT_APP_API_V1: v1,
+  API_V2: v2,
+  API_V1: v1,
 } = process.env;
 
 // v2 routes
@@ -170,7 +170,7 @@ The following can be found in *middleware/authMiddleware.js*:
 const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
-const { REACT_APP_JWT_SECRET: jwtSecret } = process.env;
+const { JWT_SECRET: jwtSecret } = process.env;
 
 module.exports = function(req, res, next) {
   const token = req.header('x-auth-token');
@@ -481,8 +481,8 @@ const checkEmailPayload = [
 ];
 ```
 
-> Be sure to provide a valid SendGrid API key for *REACT_APP_SENDGRID_KEY* in *.env*.
-> Your **from** key will be the value of *REACT_APP_VERIFIED_SENDER_EMAIL* in *.env*.
+> Be sure to provide a valid SendGrid API key for *SENDGRID_KEY* in *.env*.
+> Your **from** key will be the value of *VERIFIED_SENDER_EMAIL* in *.env*.
 > Please make sure your SendGrid send address is verified in the SendGrid dashboard or a 403: Forbidden will be returned.
 
 The main composition and sending continues in the *sendEmail* function.

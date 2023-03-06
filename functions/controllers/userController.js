@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 require('dotenv').config();
-const { REACT_APP_JWT_SECRET: jwtSecret } = process.env;
+const { JWT_SECRET: jwtSecret } = process.env;
 
 const anHour = 3600;
 const aMonth = 2592000;
